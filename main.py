@@ -4,8 +4,7 @@
 
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
             "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-decoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "Ceasar combine"]
-soncevap = "abcdefgh"
+decoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "Ceasar + Atbash"]
 retry = True
 
 
@@ -28,17 +27,23 @@ def getvigenere(text, keyword):
 
 
 def isitin(tosearchin, element):
-    if None != numinlistfirst(tosearchin, element):
+    if numinlistfirst(tosearchin, element) is not None:
         return True
     else:
         return False
 
 
 def combine(tocombine, text):
-    if tocombine == "v":
-        print(getvigenere(getatbash(geta1z26(text)), input("çözücü kelimeyi giriniz:")))
-    elif tocombine == "c":
-        ceasar(getatbash(geta1z26(text)))
+    if isitin(tocombine, "a1"):
+        text = geta1z26(text)
+    if isitin(tocombine, "at"):
+        text = getatbash(text)
+    if isitin(tocombine, "v"):
+        print(getvigenere(text, input("anahtarı giriniz:")))
+    elif isitin(tocombine, "c"):
+        ceasar(text)
+    else:
+        return text
 
 
 def getatbash(text):
@@ -70,7 +75,7 @@ def geta1z26(text):
         if nums[i] == " ":
             letters.append(" ")
         else:
-            letters.append(alphabet[int(nums[i])-1])
+            letters.append(alphabet[int(nums[i]) - 1])
     return ''.join(letters)
 
 
@@ -83,12 +88,12 @@ def numinlistfirst(listtosearch, tosearch):
 
 
 def getceasar(harf, displacement):
-        if harf == " ":
-            return harf
-        elif numinlistfirst(alphabet, harf) is None:
-            return harf
-        else:
-            return alphabet[(numinlistfirst(alphabet, harf) + int(displacement)) % len(alphabet)]
+    if harf == " ":
+        return harf
+    elif numinlistfirst(alphabet, harf) is None:
+        return harf
+    else:
+        return alphabet[(numinlistfirst(alphabet, harf) + int(displacement)) % len(alphabet)]
 
 
 def printdecoders():
@@ -119,7 +124,7 @@ def ceasar(text):
 
 
 def runprog():
-    print("-"*10 + "=" + "YÖNTEMLER" + "=" + "-"*10, end='\n')
+    print("-" * 10 + "=" + "YÖNTEMLER" + "=" + "-" * 10, end='\n')
     printdecoders()
     decoder = input()
     retry = True
@@ -134,8 +139,10 @@ def runprog():
             print(getatbash(input("Şifrenizi giriniz:")))
         elif int(decoder) == 4:
             print(getvigenere(input("Şifrenizi giriniz:"), input("Çözücü kelimeyi giriniz:")), end="\n")
-        elif int(decoder) == numinlistfirst(decoders, "Ceasar combine"):
-            combine("c", input("şifrenizi giriniz"))
+        elif int(decoder) == numinlistfirst(decoders, "Ceasar + Atbash"):
+            result = combine(["c", "at"], input("şifrenizi giriniz"))
+            if result is not None:
+                print(result)
         print("Devam (evet/hayır):", end="\n")
         reply = input()
         if reply.lower == "quit":
