@@ -36,7 +36,7 @@ def isitin(tosearchin, element):
 
 def combine(tocombine, text):
     if tocombine == "v":
-        print(getvigenere(getatbash(geta1z26(text)), input("çözücü kelimeyi giriniz:")))
+        print(getvigenere(getatbash(geta1z26(text)), input("ciphered word:")))
     elif tocombine == "c":
         ceasar(getatbash(geta1z26(text)))
 
@@ -119,28 +119,28 @@ def ceasar(text):
 
 
 def runprog():
-    print("-"*10 + "=" + "YÖNTEMLER" + "=" + "-"*10, end='\n')
+    print("-"*10 + "=" + "Decipher methods" + "=" + "-"*10, end='\n')
     printdecoders()
     decoder = input()
     retry = True
     while retry:
         if decoder.lower() == "ceasar" or decoder.lower() == "sezar" or \
                         int(decoder) == numinlistfirst(decoders, "Ceasar"):
-            ceasar(input("Şifrenizi giriniz:"))
+            ceasar(input("cipher:"))
         elif decoder.lower() == "numbers" or decoder.lower() == "a1z26" or \
                         int(decoder) == numinlistfirst(decoders, "A1Z26"):
-            print(geta1z26(input("Şifrenizi giriniz:")))
+            print(geta1z26(input("cipher")))
         elif decoder.lower() == "vigenere" or decoder.lower() == "vigenére" or int(decoder) == 3:
-            print(getatbash(input("Şifrenizi giriniz:")))
+            print(getatbash(input("cipher:")))
         elif int(decoder) == 4:
-            print(getvigenere(input("Şifrenizi giriniz:"), input("Çözücü kelimeyi giriniz:")), end="\n")
-        elif int(decoder) == numinlistfirst(decoders, "Ceasar combine"):
-            combine("c", input("şifrenizi giriniz"))
-        print("Devam (evet/hayır):", end="\n")
+            print(getvigenere(input("cipher:"), input("key:")), end="\n")
+        elif int(decoder) == numinlistfirst(decoders, "Ceasar "):
+            combine("c", input("cipher:"))
+        print("continue?:", end="\n")
         reply = input()
-        if reply.lower == "quit":
+        if reply.lower == "no":
             retry = False
-        elif reply.lower() == "evet":
+        elif reply.lower() == "yes":
             retry = True
             print("\n")
         else:
