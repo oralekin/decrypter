@@ -16,7 +16,6 @@ retry = True
 lang = input("language/dil:")
 if lang == "tr":
     alphabet = tralphabet
-# kek
     decoders = trdecoders
     strings = trstrings
 elif lang == "en":
