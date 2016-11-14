@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-tralphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-            "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+tralphabet = ["a", "b", "c", "ç", "d", "e", "f", "g", "ğ", "h", "i", "ı", "j", "k", "l",
+              "m", "n", "o", "ö", "p", "q", "r", "s", "ş", "t", "u", "ü", "v", "y", "z"]
 enalphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-            "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+              "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 endecoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "combined"]
 trdecoders = ["Sezar", "A1Z26", "Atbeş", "Vicenere", "bileşik"]
-trstrings = []
-enstrings = []
+trstrings = ["şifre:", "anahtar:", "YÖNTEMLER", "devam?", "evet", "hayır"]
+enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "hayır"]
+# placeholder b4 i learn to do xml's
 
 retry = True
 lang = input("language/dil:")
@@ -17,6 +18,11 @@ if lang == "tr":
     alphabet = tralphabet
     decoders = trdecoders
     strings = trstrings
+elif lang == "en":
+    alphabet = enalphabet
+    decoders = endecoders
+    strings = enstrings
+
 
 def getvigenere(text, keyword):
     key = []
@@ -49,7 +55,7 @@ def combine(tocombine, text):
     if isitin(tocombine, "at"):
         text = getatbash(text)
     if isitin(tocombine, "vi"):
-        print(getvigenere(text, input("anahtarı giriniz:")))
+        print(getvigenere(text, input(strings[2])))
     elif isitin(tocombine, "ce"):
         ceasar(text)
     else:
@@ -134,34 +140,35 @@ def ceasar(text):
 
 
 def runprog():
-    print("-" * 10 + "=" + "YÖNTEMLER" + "=" + "-" * 10, end='\n')
+    print("-" * 10 + "=" + strings[3] + "=" + "-" * 10, end='\n')
     printdecoders()
     decoder = input()
     retry = True
     while retry:
         if int(decoder) == 1:
-            ceasar(input("Şifrenizi giriniz:"))
+            ceasar(input(strings[1]))
         elif int(decoder) == 2:
-            print(geta1z26(input("Şifrenizi giriniz:")))
+            print(geta1z26(input(strings[1])))
         elif int(decoder) == 3:
-            print(getatbash(input("Şifrenizi giriniz:")))
+            print(getatbash(input(strings[1])))
         elif int(decoder) == 4:
-            print(getvigenere(input("Şifrenizi giriniz:"), input("Çözücü kelimeyi giriniz:")), end="\n")
+            print(getvigenere(input(strings[1]), input(strings[2])), end="\n")
         elif int(decoder) == 5:
-            methodraw = input("methods:")
-            i = 0; methods = []
+            methodraw = input(strings[3].lower() + ":")
+            i = 0
+            methods = []
             for _ in methodraw:
                 i += 1
                 if i % 2 == 0:
                     methods.append(methodraw[i - 1] + methodraw[i])
-            result = combine(methods, input("şifrenizi giriniz"))
+            result = combine(methods, input(strings[1]))
             if result is not None:
                 print(result)
-        print("Devam (evet/hayır):", end="\n")
+        print(strings[4], end="\n")
         reply = input()
-        if reply.lower == "quit":
+        if reply.lower == strings[6].lower():
             retry = False
-        elif reply.lower() == "evet":
+        elif reply.lower() == strings[5].lower():
             retry = True
             print("\n")
         else:
