@@ -2,11 +2,21 @@
 # -*- coding: utf-8 -*-
 
 
-alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
+tralphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
             "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-decoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "combined"]
-retry = True
+enalphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
+            "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+endecoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "combined"]
+trdecoders = ["Sezar", "A1Z26", "Atbeş", "Vicenere", "bileşik"]
+trstrings = []
+enstrings = []
 
+retry = True
+lang = input("language/dil:")
+if lang == "tr":
+    alphabet = tralphabet
+    decoders = trdecoders
+    strings = trstrings
 
 def getvigenere(text, keyword):
     key = []
@@ -129,17 +139,15 @@ def runprog():
     decoder = input()
     retry = True
     while retry:
-        if decoder.lower() == "ceasar" or decoder.lower() == "sezar" or \
-                        int(decoder) == numinlistfirst(decoders, "Ceasar"):
+        if int(decoder) == 1:
             ceasar(input("Şifrenizi giriniz:"))
-        elif decoder.lower() == "numbers" or decoder.lower() == "a1z26" or \
-                        int(decoder) == numinlistfirst(decoders, "A1Z26"):
+        elif int(decoder) == 2:
             print(geta1z26(input("Şifrenizi giriniz:")))
-        elif decoder.lower() == "vigenere" or decoder.lower() == "vigenére" or int(decoder) == 3:
+        elif int(decoder) == 3:
             print(getatbash(input("Şifrenizi giriniz:")))
         elif int(decoder) == 4:
             print(getvigenere(input("Şifrenizi giriniz:"), input("Çözücü kelimeyi giriniz:")), end="\n")
-        elif int(decoder) == numinlistfirst(decoders, "Ceasar + Atbash"):
+        elif int(decoder) == 5:
             methodraw = input("methods:")
             i = 0; methods = []
             for _ in methodraw:
