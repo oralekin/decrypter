@@ -1,27 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# \add\b.
 
 
 tralphabet = ["a", "b", "c", "ç", "d", "e", "f", "g", "ğ", "h", "i", "ı", "j", "k", "l",
               "m", "n", "o", "ö", "p", "q", "r", "s", "ş", "t", "u", "ü", "v", "y", "z"]
-enalphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-              "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+enalphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+              "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 endecoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "combined"]
 trdecoders = ["Sezar", "A1Z26", "Atbeş", "Vicenere", "bileşik"]
 trstrings = ["şifre:", "anahtar:", "YÖNTEMLER", "devam?", "evet", "hayır"]
 enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "hayır"]
 # placeholder b4 i learn to do xml's
-
 retry = True
-lang = input("language/dil:")
-if lang == "tr":
-    alphabet = tralphabet
-    decoders = trdecoders
-    strings = trstrings
-elif lang == "en":
-    alphabet = enalphabet
-    decoders = endecoders
-    strings = enstrings
+
+
+def bin2dec(num):
+    i = len(str(num))
+    num = 0
+    for bas in str(num):
+        i += -1
+        num += int(bas) * (2 ** i)
+    return num
 
 
 def getvigenere(text, keyword):
@@ -55,7 +55,7 @@ def combine(tocombine, text):
     if isitin(tocombine, "at"):
         text = getatbash(text)
     if isitin(tocombine, "vi"):
-        print(getvigenere(text, input(strings[2])))
+        print(getvigenere(text, input(strings[1])))
     elif isitin(tocombine, "ce"):
         ceasar(text)
     else:
@@ -140,39 +140,56 @@ def ceasar(text):
 
 
 def runprog():
-    print("-" * 10 + "=" + strings[3] + "=" + "-" * 10, end='\n')
+    print("-" * 10 + "=" + strings[2] + "=" + "-" * 10, end='\n')
     printdecoders()
     decoder = input()
     retry = True
     while retry:
         if int(decoder) == 1:
-            ceasar(input(strings[1]))
+            ceasar(input(strings[0]))
         elif int(decoder) == 2:
-            print(geta1z26(input(strings[1])))
+            print(geta1z26(input(strings[0])))
         elif int(decoder) == 3:
-            print(getatbash(input(strings[1])))
+            print(getatbash(input(strings[0])))
         elif int(decoder) == 4:
-            print(getvigenere(input(strings[1]), input(strings[2])), end="\n")
+            print(getvigenere(input(strings[0]), input(strings[1])), end="\n")
         elif int(decoder) == 5:
-            methodraw = input(strings[3].lower() + ":")
+            methodraw = input(strings[2].lower() + ":")
             i = 0
             methods = []
             for _ in methodraw:
-                i += 1
-                if i % 2 == 0:
+                if i % 2 == 1:
                     methods.append(methodraw[i - 1] + methodraw[i])
-            result = combine(methods, input(strings[1]))
-            if result is not None:
-                print(result)
-        print(strings[4], end="\n")
+                i += 1
+            print(combine(methods, input(strings[0])))
+        print(strings[3], end="\n")
         reply = input()
-        if reply.lower == strings[6].lower():
+        if reply.lower == strings[5].lower():
             retry = False
-        elif reply.lower() == strings[5].lower():
+        elif reply.lower() == strings[4].lower():
             retry = True
             print("\n")
         else:
             retry = False
 
 
+def binarydecipher(text, parsenum):
+    lastword = []
+    for t in range(0, len(text) / parsenum):
+        word = ""
+        for n in range(1, parsenum):
+            word += text[n + parsenum * t]
+        lastword.append(word)
+    return 5 # placeholder
+
+
+lang = input("language/dil:")
+if lang == "tr":
+    alphabet = tralphabet
+    decoders = trdecoders
+    strings = trstrings
+elif lang == "en":
+    alphabet = enalphabet
+    decoders = endecoders
+    strings = enstrings
 runprog()
