@@ -4,7 +4,7 @@
 
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
             "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-decoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "Ceasar + Atbash"]
+decoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "combined"]
 retry = True
 
 
@@ -38,9 +38,9 @@ def combine(tocombine, text):
         text = geta1z26(text)
     if isitin(tocombine, "at"):
         text = getatbash(text)
-    if isitin(tocombine, "v"):
+    if isitin(tocombine, "vi"):
         print(getvigenere(text, input("anahtarı giriniz:")))
-    elif isitin(tocombine, "c"):
+    elif isitin(tocombine, "ce"):
         ceasar(text)
     else:
         return text
@@ -140,7 +140,13 @@ def runprog():
         elif int(decoder) == 4:
             print(getvigenere(input("Şifrenizi giriniz:"), input("Çözücü kelimeyi giriniz:")), end="\n")
         elif int(decoder) == numinlistfirst(decoders, "Ceasar + Atbash"):
-            result = combine(["c", "at"], input("şifrenizi giriniz"))
+            methodraw = input("methods:")
+            i = 0; methods = []
+            for _ in methodraw:
+                i += 1
+                if i % 2 == 0:
+                    methods.append(methodraw[i - 1] + methodraw[i])
+            result = combine(methods, input("şifrenizi giriniz"))
             if result is not None:
                 print(result)
         print("Devam (evet/hayır):", end="\n")
