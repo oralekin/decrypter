@@ -66,10 +66,10 @@ def getatbash(text):
     results = []
 
     for letter in text:
-        if letter == " ":
-            results.append(" ")
-        else:
+        if isitin(alphabet, letter) is True:
             results.append(alphabet[(numinlistfirst(alphabet, letter)) * -1])
+        else:
+            results.append(letter)
     return ''.join(results)
 
 
@@ -78,22 +78,40 @@ def geta1z26(text):
     nums = []
     letters = []
     for character in text:
+        if len(nums) == 0:
+            nums.append("")
         if character == "-":
             tire += 1
-        elif character == " " or character == "," or character == "." or character == "?" or character == "!":
-            nums.append(" ")
+        elif character == " " or character == "," or character == "." or character == "?" or character == "!" or\
+                        character == ":":
+            nums.append(character)
             tire += 1
+        elif character == "'" or character == '"':
+            tire += 1
+            nums.append(character)
         elif len(nums) < tire:
+            if len(nums) > 0:
+                if not nums[-1] == "":
+                    nums.append(str(character))
+        elif nums[tire-1] == " ":
             nums.append(str(character))
+            tire += 1
         else:
             nums[tire - 1] += str(character)
     for i in range(0, len(nums)):
-        if nums[i] == " ":
-            letters.append(" ")
+        if not isint(nums[i]):
+            letters.append(nums[i])
         else:
             letters.append(alphabet[int(nums[i]) - 1])
     return ''.join(letters)
 
+
+def isint(val):
+    try:
+        int(val)
+        return True
+    except ValueError:
+        return False
 
 def numinlistfirst(listtosearch, tosearch):
     nelement = 0
@@ -173,14 +191,13 @@ def runprog():
             retry = False
 
 
-def binarydecipher(text, parsenum):
+def getbinary(text, parsenum):
     lastword = []
     for t in range(0, len(text) / parsenum):
         word = ""
         for n in range(1, parsenum):
             word += text[n + parsenum * t]
         lastword.append(word)
-    return 5 # placeholder
 
 
 lang = input("language/dil:")
