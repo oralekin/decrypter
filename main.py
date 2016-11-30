@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# \add\b.
 
 
 tralphabet = ["a", "b", "c", "ç", "d", "e", "f", "g", "ğ", "h", "i", "ı", "j", "k", "l",
@@ -49,7 +48,7 @@ def isitin(tosearchin, element):
         return False
 
 
-def combine(tocombine, text):
+def getcombined(tocombine, text):
     if isitin(tocombine, "a1"):
         text = geta1z26(text)
     if isitin(tocombine, "at"):
@@ -82,7 +81,7 @@ def geta1z26(text):
             nums.append("")
         if character == "-":
             tire += 1
-        elif character == " " or character == "," or character == "." or character == "?" or character == "!" or\
+        elif character == " " or character == "," or character == "." or character == "?" or character == "!" or \
                         character == ":":
             nums.append(character)
             tire += 1
@@ -93,7 +92,7 @@ def geta1z26(text):
             if len(nums) > 0:
                 if not nums[-1] == "":
                     nums.append(str(character))
-        elif nums[tire-1] == " ":
+        elif nums[tire - 1] == " ":
             nums.append(str(character))
             tire += 1
         else:
@@ -112,6 +111,7 @@ def isint(val):
         return True
     except ValueError:
         return False
+
 
 def numinlistfirst(listtosearch, tosearch):
     nelement = 0
@@ -158,11 +158,12 @@ def ceasar(text):
 
 
 def runprog():
-    print("-" * 10 + "=" + strings[2] + "=" + "-" * 10, end='\n')
-    printdecoders()
-    decoder = input()
     retry = True
     while retry:
+        print("-" * 10 + "=" + strings[2] + "=" + "-" * 10, end='\n')
+        printdecoders()
+        print(end="\n")
+        decoder = input()
         if int(decoder) == 1:
             ceasar(input(strings[0]))
         elif int(decoder) == 2:
@@ -179,14 +180,13 @@ def runprog():
                 if i % 2 == 1:
                     methods.append(methodraw[i - 1] + methodraw[i])
                 i += 1
-            print(combine(methods, input(strings[0])))
+            print(getcombined(methods, input(strings[0])))
         print(strings[3], end="\n")
         reply = input()
         if reply.lower == strings[5].lower():
             retry = False
         elif reply.lower() == strings[4].lower():
             retry = True
-            print("\n")
         else:
             retry = False
 
@@ -201,6 +201,7 @@ def getbinary(text, parsenum):
 
 
 lang = input("language/dil:")
+print(end="\n")
 if lang == "tr":
     alphabet = tralphabet
     decoders = trdecoders
