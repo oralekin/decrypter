@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+# lol is this encrypted yet
 
 tralphabet = ["a", "b", "c", "ç", "d", "e", "f", "g", "ğ", "h", "i", "ı", "j", "k", "l",
               "m", "n", "o", "ö", "p", "q", "r", "s", "ş", "t", "u", "ü", "v", "y", "z"]
@@ -110,8 +110,8 @@ def isint(val):
         int(val)
         return True
     except ValueError:
-        return False
-
+        return 
+     
 
 def numinlistfirst(listtosearch, tosearch):
     nelement = 0
