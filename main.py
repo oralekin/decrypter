@@ -9,7 +9,7 @@ enalphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
 endecoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "combined"]
 trdecoders = ["Sezar", "A1Z26", "Atbeş", "Vicenere", "bileşik"]
 trstrings = ["şifre:", "anahtar:", "YÖNTEMLER", "devam?", "evet", "hayır"]
-enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "hayır"]
+enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "no"]
 # placeholder b4 i learn to do xml's
 retry = True
 
