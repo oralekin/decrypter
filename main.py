@@ -14,15 +14,6 @@ enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "no"]
 retry = True
 
 
-def bin2dec(num):
-    i = len(str(num))
-    num = 0
-    for bas in str(num):
-        i += -1
-        num += int(bas) * (2 ** i)
-    return num
-
-
 def getvigenere(text, keyword):
     key = []
     result = []
