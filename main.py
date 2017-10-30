@@ -14,6 +14,170 @@ enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "no"]
 retry = True
 
 
+tratbash = {"a": "z", "b": "y", "c": "v", "ç": "ü", "d": "u", "e": "t", "f": "ş", "g": "s", "ğ": "r", "h": "p",
+            "ı": "ö", "i": "o", "j": "n", "k": "m", "l": "l", "m": "k", "n": "j", "o": "i", "ö": "ı", "p": "h",
+            "r": "ğ", "s": "g", "ş": "f", "t": "e", "u": "d", "ü": "ç", "v": "c", "y": "b", "z": "a"}
+
+enatbash = {"a": "z", "b": "y", "c": "x", "d": "w", "e": "v", "f": "u", "g": "t", "h": "s", "i": "r",
+            "j": "q", "k": "p", "l": "o", "m": "n", "n": "m", "o": "l", "p": "k", "q": "j", "r": "i",
+            "s": "h", "t": "g", "u": "f", "v": "e", "w": "d", "x": "c", "y": "b", "z": "a"}
+
+
+def enc_ceaser_tr(sentence, num):
+    newSentence = ""
+    for character in sentence:
+        i = -1
+        for x in tralphabet:
+            i += 1
+            if x == character:
+                break
+        if character in tralphabet:
+            if i + num < 29:
+                newSentence += tralphabet[i + num]
+            else:
+                newSentence += tralphabet[(i + num) - 29]
+        else:
+            newSentence += character
+    print("-" * 20)
+    print("Cümleniz şuydu: \"", sentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
+    print("-" * 20)
+
+def enc_ceaser_en(sentence, num):
+    newSentence = ""
+    for character in sentence:
+        i = -1
+        for x in enalphabet:
+            i += 1
+            if x == character:
+                break
+        if character in enalphabet:
+            if i + num < 26:
+                newSentence += enalphabet[i + num]
+            else:
+                newSentence += enalphabet[(i + num) - 26]
+        else:
+            newSentence += character
+    print("-" * 20)
+    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
+    print("-" * 20)
+
+def enc_atbash_tr(userSentence):
+    newSentence = ""
+    for character in userSentence:
+        if character in tratbash:
+            newSentence += tratbash[character]
+        else:
+            newSentence += character
+    print("-" * 20)
+    print("Cümleniz şuydu: \"", userSentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
+    print("-" * 20)
+
+def enc_atbash_en(userSentence):
+    newSentence = ""
+    for character in userSentence:
+        if character in tratbash:
+            newSentence += tratbash[character]
+        else:
+            newSentence += character
+    print("-" * 20)
+    print("Your sentence was: \"", userSentence, "\" \nEncrypted form:: \"", newSentence, "\"")
+    print("-" * 20)
+
+def enc_a1z26_tr(sentence):
+    newSentence = ""
+    for character in sentence:
+        i = -1
+        if character in tralphabet:
+            for x in tralphabet:
+                i += 1
+                if x == character:
+                    break
+            newSentence += "-"
+            newSentence += str(i)
+        else:
+            newSentence += character
+    print("-" * 20)
+    print("Cümleniz şuydu: \"", sentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
+    print("-" * 20)
+
+def enc_a1z26_en(sentence):
+    newSentence = ""
+    for character in sentence:
+        i = -1
+        if character in enalphabet:
+            for x in enalphabet:
+                i += 1
+                if x == character:
+                    break
+            newSentence += "-"
+            newSentence += str(i)
+        else:
+            newSentence += character
+    print("-" * 20)
+    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
+    print("-" * 20)
+
+def enc_vigenere_en(keyword, sentence):
+    keynumbers = []
+    for character in keyword:
+        i = -1
+        for word in enalphabet:
+            i += 1
+            if character == word:
+                break
+        keynumbers.append(i)
+    y = -1
+    newSentence = ""
+    for char in sentence:
+        if char in enalphabet:
+            i = -1
+            y += 1
+            for word in enalphabet:
+                i += 1
+                if char == word:
+                    break
+            i += int(keynumbers[(y % len(keynumbers))])
+            if i < 26:
+                newSentence += str(enalphabet[i])
+            else:
+                newSentence += str(enalphabet[(i - 26)])
+        else:
+            newSentence += char
+    print("-" * 20)
+    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
+    print("-" * 20)
+
+def enc_vigenere_tr(keyword, sentence):
+    keynumbers = []
+    for character in keyword:
+        i = -1
+        for word in tralphabet:
+            i += 1
+            if character == word:
+                break
+        keynumbers.append(i)
+    y = -1
+    newSentence = ""
+    for char in sentence:
+        if char in tralphabet:
+            i = -1
+            y += 1
+            for word in tralphabet:
+                i += 1
+                if char == word:
+                    break
+            i += int(keynumbers[(y % len(keynumbers))])
+            if i < 29:
+                newSentence += str(tralphabet[i])
+            else:
+                newSentence += str(tralphabet[(i - 29)])
+        else:
+            newSentence += char
+    print("-" * 20)
+    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
+    print("-" * 20)
+
+
 def bin2dec(num):
     i = len(str(num))
     num = 0
