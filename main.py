@@ -23,45 +23,45 @@ enatbash = {"a": "z", "b": "y", "c": "x", "d": "w", "e": "v", "f": "u", "g": "t"
             "s": "h", "t": "g", "u": "f", "v": "e", "w": "d", "x": "c", "y": "b", "z": "a"}
 
 
-def enc_ceaser_tr(sentence, num):
-    newSentence = ""
-    for character in sentence:
-        i = -1
-        for x in tralphabet:
-            i += 1
-            if x == character:
-                break
-        if character in tralphabet:
-            if i + num < 29:
-                newSentence += tralphabet[i + num]
+def encrypt_ceaser(sentence, num):
+    if lang == "tr":
+        newSentence = ""
+        for character in sentence:
+            i = -1
+            for x in tralphabet:
+                i += 1
+                if x == character:
+                    break
+            if character in tralphabet:
+                if i + num < 29:
+                    newSentence += tralphabet[i + num]
+                else:
+                    newSentence += tralphabet[(i + num) - 29]
             else:
-                newSentence += tralphabet[(i + num) - 29]
-        else:
-            newSentence += character
-    print("-" * 20)
-    print("Cümleniz şuydu: \"", sentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
-    print("-" * 20)
-
-def enc_ceaser_en(sentence, num):
-    newSentence = ""
-    for character in sentence:
-        i = -1
-        for x in enalphabet:
-            i += 1
-            if x == character:
-                break
-        if character in enalphabet:
-            if i + num < 26:
-                newSentence += enalphabet[i + num]
+                newSentence += character
+        print("-" * 20)
+        print("Cümleniz şuydu: \"", sentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
+        print("-" * 20)
+    else:
+        newSentence = ""
+        for character in sentence:
+            i = -1
+            for x in enalphabet:
+                i += 1
+                if x == character:
+                    break
+            if character in enalphabet:
+                if i + num < 26:
+                    newSentence += enalphabet[i + num]
+                else:
+                    newSentence += enalphabet[(i + num) - 26]
             else:
-                newSentence += enalphabet[(i + num) - 26]
-        else:
-            newSentence += character
-    print("-" * 20)
-    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
-    print("-" * 20)
+                newSentence += character
+        print("-" * 20)
+        print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
+        print("-" * 20)
 
-def enc_atbash_tr(userSentence):
+def encrypt_atbash_tr(userSentence):
     newSentence = ""
     for character in userSentence:
         if character in tratbash:
@@ -72,7 +72,7 @@ def enc_atbash_tr(userSentence):
     print("Cümleniz şuydu: \"", userSentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
     print("-" * 20)
 
-def enc_atbash_en(userSentence):
+def encrypt_atbash_en(userSentence):
     newSentence = ""
     for character in userSentence:
         if character in tratbash:
@@ -83,7 +83,7 @@ def enc_atbash_en(userSentence):
     print("Your sentence was: \"", userSentence, "\" \nEncrypted form:: \"", newSentence, "\"")
     print("-" * 20)
 
-def enc_a1z26_tr(sentence):
+def encrypt_a1z26_tr(sentence):
     newSentence = ""
     for character in sentence:
         i = -1
@@ -100,7 +100,7 @@ def enc_a1z26_tr(sentence):
     print("Cümleniz şuydu: \"", sentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
     print("-" * 20)
 
-def enc_a1z26_en(sentence):
+def encrypt_a1z26_en(sentence):
     newSentence = ""
     for character in sentence:
         i = -1
@@ -117,7 +117,7 @@ def enc_a1z26_en(sentence):
     print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
     print("-" * 20)
 
-def enc_vigenere_en(keyword, sentence):
+def encrypt_vigenere_en(keyword, sentence):
     keynumbers = []
     for character in keyword:
         i = -1
@@ -147,7 +147,7 @@ def enc_vigenere_en(keyword, sentence):
     print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
     print("-" * 20)
 
-def enc_vigenere_tr(keyword, sentence):
+def encrypt_vigenere_tr(keyword, sentence):
     keynumbers = []
     for character in keyword:
         i = -1
@@ -187,7 +187,7 @@ def bin2dec(num):
     return num
 
 
-def getvigenere(text, keyword):
+def decrypt_vigenere(text, keyword):
     key = []
     result = []
     i = -1
@@ -200,7 +200,7 @@ def getvigenere(text, keyword):
         else:
             i += 1
         keynum = key[i % len(key)]
-        decipherletter = getceasar(cipherletter, 25 - keynum)
+        decipherletter = decrypt_ceasar(cipherletter, 25 - keynum)
         result.append(decipherletter)
     return ''.join(result)
 
@@ -212,20 +212,20 @@ def isitin(tosearchin, element):
         return False
 
 
-def getcombined(tocombine, text):
+def decrypt_combined(tocombine, text):
     if isitin(tocombine, "a1"):
-        text = geta1z26(text)
+        text = decrypt_a1z26(text)
     if isitin(tocombine, "at"):
-        text = getatbash(text)
+        text = decrypt_atbash(text)
     if isitin(tocombine, "vi"):
-        print(getvigenere(text, input(strings[1])))
+        print(decrypt_vigenere(text, input(strings[1])))
     elif isitin(tocombine, "ce"):
         ceasar(text)
     else:
         return text
 
 
-def getatbash(text):
+def decrypt_atbash(text):
     results = []
 
     for letter in text:
@@ -236,31 +236,31 @@ def getatbash(text):
     return ''.join(results)
 
 
-def geta1z26(text):
-    tire = 1
+def decrypt_a1z26(text):
+    hyphen = 1
     nums = []
     letters = []
     for character in text:
         if len(nums) == 0:
             nums.append("")
         if character == "-":
-            tire += 1
+            hyphen += 1
         elif character == " " or character == "," or character == "." or character == "?" or character == "!" or \
                         character == ":":
             nums.append(character)
-            tire += 1
+            hyphen += 1
         elif character == "'" or character == '"':
-            tire += 1
+            hyphen += 1
             nums.append(character)
-        elif len(nums) < tire:
+        elif len(nums) < hyphen:
             if len(nums) > 0:
                 if not nums[-1] == "":
                     nums.append(str(character))
-        elif nums[tire - 1] == " ":
+        elif nums[hyphen - 1] == " ":
             nums.append(str(character))
-            tire += 1
+            hyphen += 1
         else:
-            nums[tire - 1] += str(character)
+            nums[hyphen - 1] += str(character)
     for i in range(0, len(nums)):
         if not isint(nums[i]):
             letters.append(nums[i])
@@ -285,7 +285,7 @@ def numinlistfirst(listtosearch, tosearch):
             return nelement
 
 
-def getceasar(harf, displacement):
+def decrypt_ceasar(harf, displacement):
     if harf == " ":
         return harf
     elif numinlistfirst(alphabet, harf) is None:
@@ -309,7 +309,7 @@ def ceasar(text):
             print(" ", end="")
         print(": ", end="")
         for chara in text:
-            print(getceasar(chara, displacement), end="")
+            print(decrypt_ceasar(chara, displacement), end="")
         if len(text) < 33:
             if displacement % 3 == 2:
                 print(end="\n")
@@ -331,11 +331,11 @@ def runprog():
         if int(decoder) == 1:
             ceasar(input(strings[0]))
         elif int(decoder) == 2:
-            print(geta1z26(input(strings[0])))
+            print(decrypt_a1z26(input(strings[0])))
         elif int(decoder) == 3:
-            print(getatbash(input(strings[0])))
+            print(decrypt_atbash(input(strings[0])))
         elif int(decoder) == 4:
-            print(getvigenere(input(strings[0]), input(strings[1])), end="\n")
+            print(decrypt_vigenere(input(strings[0]), input(strings[1])), end="\n")
         elif int(decoder) == 5:
             methodraw = input(strings[2].lower() + ":")
             i = 0
@@ -344,7 +344,7 @@ def runprog():
                 if i % 2 == 1:
                     methods.append(methodraw[i - 1] + methodraw[i])
                 i += 1
-            print(getcombined(methods, input(strings[0])))
+            print(decrypt_combined(methods, input(strings[0])))
         print(strings[3], end="\n")
         reply = input()
         if reply.lower == strings[5].lower():
@@ -355,7 +355,7 @@ def runprog():
             retry = False
 
 
-def getbinary(text, parsenum):
+def decrypt_binary(text, parsenum):
     lastword = []
     for t in range(0, len(text) / parsenum):
         word = ""
