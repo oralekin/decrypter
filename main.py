@@ -23,47 +23,44 @@ enatbash = {"a": "z", "b": "y", "c": "x", "d": "w", "e": "v", "f": "u", "g": "t"
             "s": "h", "t": "g", "u": "f", "v": "e", "w": "d", "x": "c", "y": "b", "z": "a"}
 
 
-def encrypt_ceaser(text, num):
-    result = ""
-    for character in sentence:
-        i = -1
-        for x in alphabet:
-            i += 1
-            if x == character:
-                break
-        if character in alphabet:
-            if i + num < 29:
+def encrypt_ceaser(text, num): 
+    result = "" 
+    for character in sentence: 
+        i = -1 
+        for x in alphabet: 
+            i += 1 
+            if x == character: 
+                break 
+        if character in alphabet: 
+            if i + num < len(alphabet): 
                 result += alphabet[i + num]
             else:
-                result += alphabet[(i + num) - 29]
+                result += alphabet[(i + num) - len(alphabet)] 
+        else: 
+            result += character 
+    return result 
+     
+def encrypt_atbash_tr(text):
+    result = ""
+    for character in text:
+        if character in tratbash:
+            result += tratbash[character]
         else:
             result += character
-    return result
-    
-def encrypt_atbash_tr(userSentence):
-    newSentence = ""
-    for character in userSentence:
-        if character in tratbash:
-            newSentence += tratbash[character]
-        else:
-            newSentence += character
-    print("-" * 20)
-    print("Cümleniz şuydu: \"", userSentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
-    print("-" * 20)
+    return result 
 
-def encrypt_atbash_en(userSentence):
-    newSentence = ""
-    for character in userSentence:
+def encrypt_atbash_en(text):
+    result = ""
+    for character in text:
         if character in tratbash:
-            newSentence += tratbash[character]
+            result += tratbash[character]
         else:
-            newSentence += character
-    print("-" * 20)
-    print("Your sentence was: \"", userSentence, "\" \nEncrypted form:: \"", newSentence, "\"")
-    print("-" * 20)
+            result += character
+    return result 
+     
 
 def encrypt_a1z26_tr(sentence):
-    newSentence = ""
+    result = ""
     for character in sentence:
         i = -1
         if character in tralphabet:
@@ -71,16 +68,15 @@ def encrypt_a1z26_tr(sentence):
                 i += 1
                 if x == character:
                     break
-            newSentence += "-"
-            newSentence += str(i)
+            result += "-"
+            result += str(i)
         else:
-            newSentence += character
-    print("-" * 20)
-    print("Cümleniz şuydu: \"", sentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
-    print("-" * 20)
+            result += character
+    return result 
+     
 
 def encrypt_a1z26_en(sentence):
-    newSentence = ""
+    result = ""
     for character in sentence:
         i = -1
         if character in enalphabet:
@@ -88,13 +84,12 @@ def encrypt_a1z26_en(sentence):
                 i += 1
                 if x == character:
                     break
-            newSentence += "-"
-            newSentence += str(i)
+            result += "-"
+            result += str(i)
         else:
-            newSentence += character
-    print("-" * 20)
-    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
-    print("-" * 20)
+            result += character
+    return result 
+     
 
 def encrypt_vigenere_en(keyword, sentence):
     keynumbers = []
@@ -106,7 +101,7 @@ def encrypt_vigenere_en(keyword, sentence):
                 break
         keynumbers.append(i)
     y = -1
-    newSentence = ""
+    result = ""
     for char in sentence:
         if char in enalphabet:
             i = -1
@@ -117,14 +112,13 @@ def encrypt_vigenere_en(keyword, sentence):
                     break
             i += int(keynumbers[(y % len(keynumbers))])
             if i < 26:
-                newSentence += str(enalphabet[i])
+                result += str(enalphabet[i])
             else:
-                newSentence += str(enalphabet[(i - 26)])
+                result += str(enalphabet[(i - 26)])
         else:
-            newSentence += char
-    print("-" * 20)
-    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
-    print("-" * 20)
+            result += char
+    return result 
+     
 
 def encrypt_vigenere_tr(keyword, sentence):
     keynumbers = []
@@ -136,7 +130,7 @@ def encrypt_vigenere_tr(keyword, sentence):
                 break
         keynumbers.append(i)
     y = -1
-    newSentence = ""
+    result = ""
     for char in sentence:
         if char in tralphabet:
             i = -1
@@ -147,15 +141,13 @@ def encrypt_vigenere_tr(keyword, sentence):
                     break
             i += int(keynumbers[(y % len(keynumbers))])
             if i < 29:
-                newSentence += str(tralphabet[i])
+                result += str(tralphabet[i])
             else:
-                newSentence += str(tralphabet[(i - 29)])
+                result += str(tralphabet[(i - 29)])
         else:
-            newSentence += char
-    print("-" * 20)
-    print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
-    print("-" * 20)
-
+            result += char
+    return result 
+     
 
 def bin2dec(num):
     i = len(str(num))
