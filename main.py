@@ -23,44 +23,23 @@ enatbash = {"a": "z", "b": "y", "c": "x", "d": "w", "e": "v", "f": "u", "g": "t"
             "s": "h", "t": "g", "u": "f", "v": "e", "w": "d", "x": "c", "y": "b", "z": "a"}
 
 
-def encrypt_ceaser(sentence, num):
-    if lang == "tr":
-        newSentence = ""
-        for character in sentence:
-            i = -1
-            for x in tralphabet:
-                i += 1
-                if x == character:
-                    break
-            if character in tralphabet:
-                if i + num < 29:
-                    newSentence += tralphabet[i + num]
-                else:
-                    newSentence += tralphabet[(i + num) - 29]
+def encrypt_ceaser(text, num):
+    result = ""
+    for character in sentence:
+        i = -1
+        for x in alphabet:
+            i += 1
+            if x == character:
+                break
+        if character in alphabet:
+            if i + num < 29:
+                result += alphabet[i + num]
             else:
-                newSentence += character
-        print("-" * 20)
-        print("Cümleniz şuydu: \"", sentence, "\" \nŞifrelenmiş formu: \"", newSentence, "\"")
-        print("-" * 20)
-    else:
-        newSentence = ""
-        for character in sentence:
-            i = -1
-            for x in enalphabet:
-                i += 1
-                if x == character:
-                    break
-            if character in enalphabet:
-                if i + num < 26:
-                    newSentence += enalphabet[i + num]
-                else:
-                    newSentence += enalphabet[(i + num) - 26]
-            else:
-                newSentence += character
-        print("-" * 20)
-        print("Your sentence was: \"", sentence, "\" \nEncrypted form:: \"", newSentence, "\"")
-        print("-" * 20)
-
+                result += alphabet[(i + num) - 29]
+        else:
+            result += character
+    return result
+    
 def encrypt_atbash_tr(userSentence):
     newSentence = ""
     for character in userSentence:
