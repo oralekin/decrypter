@@ -81,8 +81,7 @@ def geta1z26(text):
             nums.append("")
         if character == "-":
             tire += 1
-        elif character == " " or character == "," or character == "." or character == "?" or character == "!" or \
-                        character == ":":
+        elif character not in alphabet:
             nums.append(character)
             tire += 1
         elif character == "'" or character == '"':
