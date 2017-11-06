@@ -187,7 +187,7 @@ def decrypt_combined(tocombine, text):
     if isitin(tocombine, "a1"):
         text = decrypt_a1z26(text)
     if isitin(tocombine, "at"):
-        text = decrypt_atbash(text)
+        text = get_atbash(text)
     if isitin(tocombine, "vi"):
         print(decrypt_vigenere(text, input(strings[1])))
     elif isitin(tocombine, "ce"):
@@ -196,7 +196,7 @@ def decrypt_combined(tocombine, text):
         return text
 
 
-def decrypt_atbash(text):
+def get_atbash(text):
     results = []
 
     for letter in text:
@@ -304,7 +304,7 @@ def runprog():
         elif int(decoder) == 2:
             print(decrypt_a1z26(input(strings[0])))
         elif int(decoder) == 3:
-            print(decrypt_atbash(input(strings[0])))
+            print(get_atbash(input(strings[0])))
         elif int(decoder) == 4:
             print(decrypt_vigenere(input(strings[0]), input(strings[1])), end="\n")
         elif int(decoder) == 5:
