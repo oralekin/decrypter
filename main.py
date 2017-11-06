@@ -40,12 +40,13 @@ def encrypt_ceaser(text, num):
             result += character 
     return result
 
-def encrypt_a1z26_tr(sentence):
+
+def encrypt_a1z26(sentence):
     result = ""
     for character in sentence:
         i = -1
-        if character in tralphabet:
-            for x in tralphabet:
+        if character in alphabet:
+            for x in alphabet:
                 i += 1
                 if x == character:
                     break
@@ -56,27 +57,11 @@ def encrypt_a1z26_tr(sentence):
     return result 
      
 
-def encrypt_a1z26_en(sentence):
-    result = ""
-    for character in sentence:
-        i = -1
-        if character in enalphabet:
-            for x in enalphabet:
-                i += 1
-                if x == character:
-                    break
-            result += "-"
-            result += str(i)
-        else:
-            result += character
-    return result 
-     
-
-def encrypt_vigenere_en(keyword, sentence):
+def encrypt_vigenere(sentence, keyword):
     keynumbers = []
     for character in keyword:
         i = -1
-        for word in enalphabet:
+        for word in alphabet:
             i += 1
             if character == word:
                 break
@@ -84,51 +69,21 @@ def encrypt_vigenere_en(keyword, sentence):
     y = -1
     result = ""
     for char in sentence:
-        if char in enalphabet:
+        if char in alphabet:
             i = -1
             y += 1
-            for word in enalphabet:
+            for word in alphabet:
                 i += 1
                 if char == word:
                     break
             i += int(keynumbers[(y % len(keynumbers))])
-            if i < 26:
-                result += str(enalphabet[i])
+            if i < len(alphabet):
+                result += str(alphabet[i])
             else:
-                result += str(enalphabet[(i - 26)])
+                result += str(alphabet[(i - len(alphabet))])
         else:
             result += char
     return result 
-     
-
-def encrypt_vigenere_tr(keyword, sentence):
-    keynumbers = []
-    for character in keyword:
-        i = -1
-        for word in tralphabet:
-            i += 1
-            if character == word:
-                break
-        keynumbers.append(i)
-    y = -1
-    result = ""
-    for char in sentence:
-        if char in tralphabet:
-            i = -1
-            y += 1
-            for word in tralphabet:
-                i += 1
-                if char == word:
-                    break
-            i += int(keynumbers[(y % len(keynumbers))])
-            if i < 29:
-                result += str(tralphabet[i])
-            else:
-                result += str(tralphabet[(i - 29)])
-        else:
-            result += char
-    return result 
-     
 
 def bin2dec(num):
     i = len(str(num))
