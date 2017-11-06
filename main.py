@@ -8,8 +8,8 @@ enalphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
               "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 endecoders = ["Ceasar", "A1Z26", "Atbash", "Vigénere", "combined"]
 trdecoders = ["Sezar", "A1Z26", "Atbeş", "Vicenere", "bileşik"]
-trstrings = ["şifre:", "anahtar:", "YÖNTEMLER", "devam?", "evet", "hayır"]
-enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "no"]
+trstrings = ["şifre:", "anahtar:", "YÖNTEMLER", "devam?", "evet", "hayır", "şifreleme", "şifre çözme", "veya"]
+enstrings = ["cipher:", "key:", "METHODS", "continue?", "yes", "no", "Encrypt", "Decrypt", "or"]
 # placeholder b4 i learn to do xml's
 retry = True
 
@@ -25,39 +25,20 @@ enatbash = {"a": "z", "b": "y", "c": "x", "d": "w", "e": "v", "f": "u", "g": "t"
 
 def encrypt_ceaser(text, num): 
     result = "" 
-    for character in sentence: 
+    for character in text:
         i = -1 
         for x in alphabet: 
             i += 1 
             if x == character: 
                 break 
         if character in alphabet: 
-            if i + num < len(alphabet): 
+            if (i + num) < len(alphabet):
                 result += alphabet[i + num]
             else:
                 result += alphabet[(i + num) - len(alphabet)] 
         else: 
             result += character 
-    return result 
-     
-def encrypt_atbash_tr(text):
-    result = ""
-    for character in text:
-        if character in tratbash:
-            result += tratbash[character]
-        else:
-            result += character
-    return result 
-
-def encrypt_atbash_en(text):
-    result = ""
-    for character in text:
-        if character in tratbash:
-            result += tratbash[character]
-        else:
-            result += character
-    return result 
-     
+    return result
 
 def encrypt_a1z26_tr(sentence):
     result = ""
@@ -295,27 +276,42 @@ def ceasar(text):
 def runprog():
     retry = True
     while retry:
+        print(strings[6], strings[8], strings[7] + ":")
+        form = input()
         print("-" * 10 + "=" + strings[2] + "=" + "-" * 10, end='\n')
         printdecoders()
         print(end="\n")
         decoder = input()
-        if int(decoder) == 1:
-            ceasar(input(strings[0]))
-        elif int(decoder) == 2:
-            print(decrypt_a1z26(input(strings[0])))
-        elif int(decoder) == 3:
-            print(get_atbash(input(strings[0])))
-        elif int(decoder) == 4:
-            print(decrypt_vigenere(input(strings[0]), input(strings[1])), end="\n")
-        elif int(decoder) == 5:
-            methodraw = input(strings[2].lower() + ":")
-            i = 0
-            methods = []
-            for _ in methodraw:
-                if i % 2 == 1:
-                    methods.append(methodraw[i - 1] + methodraw[i])
-                i += 1
-            print(decrypt_combined(methods, input(strings[0])))
+        if form == strings[7]:
+            if int(decoder) == 1:
+                ceasar(input(strings[0]))
+            elif int(decoder) == 2:
+                print(decrypt_a1z26(input(strings[0])))
+            elif int(decoder) == 3:
+                print(get_atbash(input(strings[0])))
+            elif int(decoder) == 4:
+                print(decrypt_vigenere(input(strings[0]), input(strings[1])), end="\n")
+            elif int(decoder) == 5:
+                methodraw = input(strings[2].lower() + ":")
+                i = 0
+                methods = []
+                for _ in methodraw:
+                    if i % 2 == 1:
+                        methods.append(methodraw[i - 1] + methodraw[i])
+                    i += 1
+                print(decrypt_combined(methods, input(strings[0])))
+        else:
+            if int(decoder) == 1:
+                number = int(input("choose a number"))
+                print(encrypt_ceaser(input(strings[0]), number))
+            elif int(decoder) == 2:
+                print(encrypt_a1z26(input(strings[0])))
+            elif int(decoder) == 3:
+                print(get_atbash(input(strings[0])))
+            elif int(decoder) == 4:
+                print(encrypt_vigenere(input(strings[0]), input(strings[1])), end="\n")
+            elif int(decoder) == 5:
+                print("")
         print(strings[3], end="\n")
         reply = input()
         if reply.lower == strings[5].lower():
